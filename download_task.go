@@ -20,7 +20,7 @@ func NewDownloadTask(url string) *DownloadTask {
 func (d DownloadTask) Execute(ctx context.Context) (task.Result, error) {
 	select {
 	case <-ctx.Done():
-		return nil, ctx.Err() // TODO Custom action
+		return nil, ctx.Err() // TODO Custom error
 	case <-time.After(time.Duration(rand.Int()%1000+100) * time.Millisecond):
 		return &DownloadTaskResult{DownloadedSize: path.Base(d.url)}, nil
 	}
